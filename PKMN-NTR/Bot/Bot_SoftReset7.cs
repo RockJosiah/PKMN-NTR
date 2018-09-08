@@ -553,7 +553,7 @@ namespace pkmn_ntr.Bot
 
                         case BotState.TestDialog1:
                             Report("Bot: Test if dialog has started");
-                            waitTaskbool = Program.helper.memoryinrange(DialogOffset, 
+                            waitTaskbool = Program.helper.memoryinrange(DialogOffset,
                                 DialogIN, DialogRange);
                             if (await waitTaskbool)
                             {
@@ -592,21 +592,21 @@ namespace pkmn_ntr.Bot
 
                         case BotState.TestDialog2:
                             Report("Bot: Test if dialog has finished");
-                            waitTaskbool = Program.helper.memoryinrange(DialogOffset, 
+                            waitTaskbool = Program.helper.memoryinrange(DialogOffset,
                                 DialogOut, DialogRange);
                             if (await waitTaskbool)
                             {
                                 attempts = -10;
                                 botState = BotState.ReadParty;
                             }
-                            else if (Program.helper.lastRead >= PokedexLow && 
+                            else if (Program.helper.lastRead >= PokedexLow &&
                                 Program.helper.lastRead < PokedexHigh)
                             {
                                 Report("Bot: Pokedex screen detected");
                                 attempts = -10;
                                 botState = BotState.ExitDialog;
                             }
-                            else if (Program.helper.lastRead >= NicknameLow && 
+                            else if (Program.helper.lastRead >= NicknameLow &&
                                 Program.helper.lastRead < NicknameHigh)
                             {
                                 Report("Bot: Nickname screen detected");
@@ -666,7 +666,7 @@ namespace pkmn_ntr.Bot
                             {
                                 botState = BotState.TestsPassed;
                             }
-                            else if (Mode.SelectedIndex == 3 || Mode.SelectedIndex == 4 
+                            else if (Mode.SelectedIndex == 3 || Mode.SelectedIndex == 4
                                 || Mode.SelectedIndex == 5)
                             {
                                 botState = BotState.RunBattle1;
@@ -679,7 +679,7 @@ namespace pkmn_ntr.Bot
 
                         case BotState.TestsPassed:
                             Report("Bot: All tests passed!");
-                            if (Mode.SelectedIndex == 3 || Mode.SelectedIndex == 4 
+                            if (Mode.SelectedIndex == 3 || Mode.SelectedIndex == 4
                                 || Mode.SelectedIndex == 5)
                             {
                                 botresult = ErrorMessage.BattleMatch;
@@ -743,7 +743,7 @@ namespace pkmn_ntr.Bot
                         case BotState.NFCPatch:
                             Report("Bot: Apply NFC patch");
                             waitTaskbool = Program.helper.waitNTRwrite(
-                                LookupTable.NFCOffset, LookupTable.NFCValue, 
+                                LookupTable.NFCOffset, LookupTable.NFCValue,
                                 Program.gCmdWindow.pid);
                             if (await waitTaskbool)
                             {
@@ -811,7 +811,7 @@ namespace pkmn_ntr.Bot
 
                         case BotState.TestDialog3:
                             Report("Bot: Test if dialog has started");
-                            waitTaskbool = Program.helper.memoryinrange(DialogOffset, 
+                            waitTaskbool = Program.helper.memoryinrange(DialogOffset,
                                 DialogIN, DialogRange);
                             if (await waitTaskbool)
                             {
@@ -898,7 +898,7 @@ namespace pkmn_ntr.Bot
 
                         case BotState.Soluna3:
                             Report("Bot: Test if dialog has started");
-                            waitTaskbool = Program.helper.memoryinrange(DialogOffset, 
+                            waitTaskbool = Program.helper.memoryinrange(DialogOffset,
                                 DialogIN, DialogRange);
                             if (await waitTaskbool)
                             {
@@ -1062,7 +1062,7 @@ namespace pkmn_ntr.Bot
 
                         case BotState.TestMenu:
                             Report("Bot: Test if the menu is open");
-                            waitTaskbool = Program.helper.timememoryinrange(MenuOffset, 
+                            waitTaskbool = Program.helper.timememoryinrange(MenuOffset,
                                 MenuIN, 0x10000000, 1000, 5000);
                             if (await waitTaskbool)
                             {
@@ -1094,7 +1094,7 @@ namespace pkmn_ntr.Bot
 
                         case BotState.TestBag:
                             Report("Bot: Test if the bag is open");
-                            waitTaskbool = Program.helper.timememoryinrange(BagOffset, 
+                            waitTaskbool = Program.helper.timememoryinrange(BagOffset,
                                 BagIN, 0x10000, 1000, 5000);
                             if (await waitTaskbool)
                             {
@@ -1238,11 +1238,11 @@ namespace pkmn_ntr.Bot
                             botworking = false;
                             break;
                     }
-                    if (attempts > 10)
+                    if (attempts > 100)
                     { // Too many attempts
                         if (maxreconnect > 0)
                         {
-                            Report("Bot: Try reconnection to fix error");
+                            Report("Bot: Try reconnection to fix error -Scott");
                             waitTaskbool = Program.gCmdWindow.Reconnect();
                             maxreconnect--;
                             if (await waitTaskbool)
@@ -1258,7 +1258,7 @@ namespace pkmn_ntr.Bot
                         }
                         else
                         {
-                            Report("Bot: Maximum number of reconnection attempts reached");
+                            Report("Bot: Maximum number of reconnection attempts reached - Scott");
                             Report("Bot: STOP Gen 7 Soft-reset bot");
                             botworking = false;
                         }
@@ -1334,7 +1334,7 @@ namespace pkmn_ntr.Bot
         {
             if (botworking)
             {
-                MessageBox.Show("Stop the bot before closing this window", 
+                MessageBox.Show("Stop the bot before closing this window",
                     "Soft-reset bot", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 e.Cancel = true;
             }
